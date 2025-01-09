@@ -33,6 +33,9 @@
             this.buttonOpenFile = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +62,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.buttonImport);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonClear);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonRemove);
             this.splitContainer1.Panel1.Controls.Add(this.buttonGenerate);
             this.splitContainer1.Panel1.Controls.Add(this.buttonSettings);
             this.splitContainer1.Panel1.Controls.Add(this.buttonOpenFile);
@@ -102,8 +108,36 @@
             this.buttonGenerate.UseVisualStyleBackColor = true;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Location = new System.Drawing.Point(260, 0);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(124, 64);
+            this.buttonRemove.TabIndex = 3;
+            this.buttonRemove.Text = "リストから削除";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(390, 0);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(124, 64);
+            this.buttonClear.TabIndex = 4;
+            this.buttonClear.Text = "リストの初期化";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.Location = new System.Drawing.Point(520, 0);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(124, 64);
+            this.buttonImport.TabIndex = 5;
+            this.buttonImport.Text = "CSVからインポート";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 487);
@@ -111,6 +145,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -126,6 +161,9 @@
         private System.Windows.Forms.Button buttonOpenFile;
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Button buttonImport;
     }
 }
 
