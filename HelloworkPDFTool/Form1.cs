@@ -21,13 +21,28 @@ namespace HelloworkPDFTool
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Add path name to each file lists
+        /// </summary>
         private void AddFile(string path)
         {
-            //Add files to PDFs
+            //Remove files of PDFs
             Program.pdfs.filePaths.Add(path);
 
-            //Add files to listBox
+            //Remove files of listBox
             listBoxPDFs.Items.Add(path);
+        }
+
+        /// <summary>
+        /// Remove path name to each file lists
+        /// </summary>
+        private void RemoveFile(string path)
+        {
+            //Add files to PDFs
+            Program.pdfs.filePaths.Remove(path);
+
+            //Add files to listBox
+            listBoxPDFs.Items.Remove(path);
         }
 
         /// <summary>
@@ -44,8 +59,8 @@ namespace HelloworkPDFTool
                 //Filter files
                 foreach(string file in files)
                 {
-                    //Check the file is pdf or not
-                    if(Path.GetExtension(file).ToLower() == ".pdf")
+                    //Check the extension of file and uniqueness
+                    if(Path.GetExtension(file).ToLower() == ".pdf" && !Program.pdfs.filePaths.Contains(file))
                     {
                         AddFile(file);
                     }
@@ -78,6 +93,18 @@ namespace HelloworkPDFTool
         }
 
         /// <summary>
+        /// Remove selected item
+        /// </summary>
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            //Remove an item
+            if(listBoxPDFs.SelectedIndex != -1)
+            {
+                RemoveFile(listBoxPDFs.SelectedItem.ToString());
+            }
+        }
+
+        /// <summary>
         /// Set cursor icon
         /// </summary>
         private void Form1_DragEnter(object sender, DragEventArgs e)
@@ -93,5 +120,6 @@ namespace HelloworkPDFTool
                 e.Effect = DragDropEffects.None;
             }
         }
+
     }
 }

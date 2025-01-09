@@ -49,6 +49,7 @@
             this.listBoxPDFs.ItemHeight = 12;
             this.listBoxPDFs.Location = new System.Drawing.Point(0, 0);
             this.listBoxPDFs.Name = "listBoxPDFs";
+            this.listBoxPDFs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxPDFs.Size = new System.Drawing.Size(815, 419);
             this.listBoxPDFs.TabIndex = 0;
             // 
@@ -114,8 +115,9 @@
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(124, 64);
             this.buttonRemove.TabIndex = 3;
-            this.buttonRemove.Text = "リストから削除";
+            this.buttonRemove.Text = "選択項目を削除";
             this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
             // buttonClear
             // 
