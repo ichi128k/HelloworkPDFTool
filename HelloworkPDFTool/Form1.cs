@@ -105,11 +105,20 @@ namespace HelloworkPDFTool
         }
 
         /// <summary>
+        /// Clear both list
+        /// </summary>
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            Program.pdfs.filePaths.Clear();
+            listBoxPDFs.Items.Clear();
+        }
+
+        /// <summary>
         /// Set cursor icon
         /// </summary>
         private void Form1_DragEnter(object sender, DragEventArgs e)
         {
-            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 //Drag and drop is available
                 e.Effect = DragDropEffects.Copy;
@@ -120,6 +129,5 @@ namespace HelloworkPDFTool
                 e.Effect = DragDropEffects.None;
             }
         }
-
     }
 }
