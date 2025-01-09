@@ -1,0 +1,10 @@
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\HelloworkPDFTool.exe.config
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\HelloworkPDFTool.exe
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\HelloworkPDFTool.pdb
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.csproj.AssemblyReference.cache
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.Form1.resources
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.Properties.Resources.resources
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.csproj.GenerateResource.cache
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.csproj.CoreCompileInputs.cache
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.exe
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.pdb
