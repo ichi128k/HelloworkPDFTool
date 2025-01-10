@@ -26,11 +26,14 @@ namespace HelloworkPDFTool
         /// </summary>
         private void AddFile(string path)
         {
-            //Remove files of PDFs
-            Program.pdfs.filePaths.Add(path);
+            if(!Program.pdfs.filePaths.Contains(path))
+            {
+                //Remove files of PDFs
+                Program.pdfs.filePaths.Add(path);
 
-            //Remove files of listBox
-            listBoxPDFs.Items.Add(path);
+                //Remove files of listBox
+                listBoxPDFs.Items.Add(path);
+            }
         }
 
         /// <summary>
@@ -60,7 +63,7 @@ namespace HelloworkPDFTool
                 foreach(string file in files)
                 {
                     //Check the extension of file and uniqueness
-                    if(Path.GetExtension(file).ToLower() == ".pdf" && !Program.pdfs.filePaths.Contains(file))
+                    if(Path.GetExtension(file).ToLower() == ".pdf")
                     {
                         AddFile(file);
                     }
@@ -73,6 +76,21 @@ namespace HelloworkPDFTool
         /// </summary>
         private void buttonOpenFile_Click(object sender, EventArgs e)
         {
+            //Create OpenFileDialog
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PDFファイル|*.pdf";
+            ofd.Multiselect = true;
+            ofd.CheckFileExists = true;
+
+            //Check whether OFD has been opened or not
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                //Add the path to each list
+                foreach(string fileName in ofd.FileNames)
+                {
+                    AddFile(fileName);
+                }
+            }
 
         }
 
@@ -81,6 +99,9 @@ namespace HelloworkPDFTool
         /// </summary>
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
+            //Read all PDFs
+
+            //Save to SpreadSheet
 
         }
 
@@ -105,12 +126,18 @@ namespace HelloworkPDFTool
         }
 
         /// <summary>
-        /// Clear both list
+        /// Clear both lists
         /// </summary>
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            Program.pdfs.filePaths.Clear();
-            listBoxPDFs.Items.Clear();
+            //Show dialog
+            DialogResult result = MessageBox.Show("リストを初期化しますか?", "リストの初期化", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+            if(result == DialogResult.Yes)
+            {
+                Program.pdfs.filePaths.Clear();
+                listBoxPDFs.Items.Clear();
+            }
         }
 
         /// <summary>
