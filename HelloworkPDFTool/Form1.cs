@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -99,10 +100,15 @@ namespace HelloworkPDFTool
         /// </summary>
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
-            //Read all PDFs
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PDFファイル|*.pdf";
 
-            //Save to SpreadSheet
-
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                //Save to SpreadSheet
+                string message = Program.pdfs.Export(sfd.FileName);
+                MessageBox.Show(message);
+            }
         }
 
         /// <summary>

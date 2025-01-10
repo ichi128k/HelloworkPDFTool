@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace HelloworkPDFTool
 {
@@ -24,5 +26,32 @@ namespace HelloworkPDFTool
         {
             filePaths = new List<string>();
         }
+
+        /// <summary>
+        /// Save all datas to Spreadsheet
+        /// </summary>
+        public string Export(string fileName)
+        {
+            if(filePaths.Count > 0)
+            {
+                //Read pdfs
+
+
+                //Write to the file
+
+
+                return "ファイル書き出しに成功しました。";
+            }
+            else
+            {
+                return "PDFリストが空です。ファイルを追加してください。";
+            }
+
+        }
+
+    }
+    public class HWData
+    {
+
     }
 }
