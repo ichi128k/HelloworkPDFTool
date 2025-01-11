@@ -106,7 +106,7 @@ namespace HelloworkPDFTool
             if(sfd.ShowDialog() == DialogResult.OK)
             {
                 //Save to SpreadSheet
-                string message = Program.pdfs.Export(sfd.FileName);
+                string message = Program.pdfs.Export(sfd.FileName,toolStripProgressBar1);
                 MessageBox.Show(message);
             }
         }

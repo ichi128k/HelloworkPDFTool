@@ -30,16 +30,20 @@
         {
             this.listBoxPDFs = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buttonOpenFile = new System.Windows.Forms.Button();
-            this.buttonSettings = new System.Windows.Forms.Button();
-            this.buttonGenerate = new System.Windows.Forms.Button();
-            this.buttonRemove = new System.Windows.Forms.Button();
-            this.buttonClear = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.buttonGenerate = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
+            this.buttonOpenFile = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxPDFs
@@ -74,20 +78,50 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.listBoxPDFs);
             this.splitContainer1.Size = new System.Drawing.Size(815, 487);
             this.splitContainer1.SplitterDistance = 64;
             this.splitContainer1.TabIndex = 1;
             // 
-            // buttonOpenFile
+            // buttonImport
             // 
-            this.buttonOpenFile.Location = new System.Drawing.Point(0, 0);
-            this.buttonOpenFile.Name = "buttonOpenFile";
-            this.buttonOpenFile.Size = new System.Drawing.Size(124, 64);
-            this.buttonOpenFile.TabIndex = 0;
-            this.buttonOpenFile.Text = "ファイルの選択\r\nもしくは\r\nここに\r\nドラッグアンドドロップ";
-            this.buttonOpenFile.UseVisualStyleBackColor = true;
-            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
+            this.buttonImport.Location = new System.Drawing.Point(520, 0);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(124, 64);
+            this.buttonImport.TabIndex = 5;
+            this.buttonImport.Text = "CSVからインポート";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(390, 0);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(124, 64);
+            this.buttonClear.TabIndex = 4;
+            this.buttonClear.Text = "リストの初期化";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Location = new System.Drawing.Point(260, 0);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(124, 64);
+            this.buttonRemove.TabIndex = 3;
+            this.buttonRemove.Text = "選択項目を削除";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // buttonGenerate
+            // 
+            this.buttonGenerate.Location = new System.Drawing.Point(130, 0);
+            this.buttonGenerate.Name = "buttonGenerate";
+            this.buttonGenerate.Size = new System.Drawing.Size(124, 64);
+            this.buttonGenerate.TabIndex = 2;
+            this.buttonGenerate.Text = "生成して保存";
+            this.buttonGenerate.UseVisualStyleBackColor = true;
+            this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
             // buttonSettings
             // 
@@ -100,44 +134,37 @@
             this.buttonSettings.UseVisualStyleBackColor = true;
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
-            // buttonGenerate
+            // buttonOpenFile
             // 
-            this.buttonGenerate.Location = new System.Drawing.Point(130, 0);
-            this.buttonGenerate.Name = "buttonGenerate";
-            this.buttonGenerate.Size = new System.Drawing.Size(124, 64);
-            this.buttonGenerate.TabIndex = 2;
-            this.buttonGenerate.Text = "生成して保存";
-            this.buttonGenerate.UseVisualStyleBackColor = true;
-            this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
+            this.buttonOpenFile.Location = new System.Drawing.Point(0, 0);
+            this.buttonOpenFile.Name = "buttonOpenFile";
+            this.buttonOpenFile.Size = new System.Drawing.Size(124, 64);
+            this.buttonOpenFile.TabIndex = 0;
+            this.buttonOpenFile.Text = "ファイルの選択\r\nもしくは\r\nここに\r\nドラッグアンドドロップ";
+            this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
             // 
-            // buttonRemove
+            // statusStrip1
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(260, 0);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(124, 64);
-            this.buttonRemove.TabIndex = 3;
-            this.buttonRemove.Text = "選択項目を削除";
-            this.buttonRemove.UseVisualStyleBackColor = true;
-            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 397);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(815, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // buttonClear
+            // toolStripStatusLabel1
             // 
-            this.buttonClear.Location = new System.Drawing.Point(390, 0);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(124, 64);
-            this.buttonClear.TabIndex = 4;
-            this.buttonClear.Text = "リストの初期化";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(115, 17);
+            this.toolStripStatusLabel1.Text = "項目を選択してください";
             // 
-            // buttonImport
+            // toolStripProgressBar1
             // 
-            this.buttonImport.Location = new System.Drawing.Point(520, 0);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(124, 64);
-            this.buttonImport.TabIndex = 5;
-            this.buttonImport.Text = "CSVからインポート";
-            this.buttonImport.UseVisualStyleBackColor = true;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(300, 16);
             // 
             // Form1
             // 
@@ -152,8 +179,11 @@
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -168,6 +198,9 @@
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
     }
 }
 

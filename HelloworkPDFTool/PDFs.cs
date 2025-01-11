@@ -64,7 +64,7 @@ namespace HelloworkPDFTool
         /// <summary>
         /// Save all datas to Spreadsheet
         /// </summary>
-        public string Export(string fileName)
+        public string Export(string fileName,ToolStripProgressBar tsp)
         {
             if(filePaths.Count > 0)
             {
@@ -75,7 +75,7 @@ namespace HelloworkPDFTool
                 ReadPDFs();
 
                 //Write to the file
-                WriteSheet(fileName);
+                WriteSheet(fileName, tsp);
 
                 return "ファイル書き出しに成功しました。";
             }
@@ -122,8 +122,11 @@ namespace HelloworkPDFTool
             return true;
         }
 
-        private bool WriteSheet(string path)
+        private bool WriteSheet(string path, ToolStripProgressBar tsp)
         {
+            //Set properties of progress bar
+            tsp.Maximum = Program.pdfs.filePaths.Count;
+
             using (StreamWriter sw = new StreamWriter(path))
             using (CsvWriter csv = new CsvWriter(sw,CultureInfo.InvariantCulture))
             {
@@ -131,9 +134,17 @@ namespace HelloworkPDFTool
                 csv.Context.RegisterClassMap<HWDataMap>();
 
                 //Write records
-                csv.WriteRecords(hwds);
-
+                int i = 0;
+                foreach (HWData hwd in hwds)
+                {
+                    tsp.Value = i;
+                    csv.WriteRecord(hwd);
+                    i++;
+                }
             }
+
+            //Reset TSP
+            tsp.Value = 0;
 
             return true;
         }
