@@ -25,3 +25,12 @@ C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\System.Nu
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\Hellowor.A1C7C2A1.Up2Date
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\libSkiaSharp.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\libSkiaSharp.dylib
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\x86\libSkiaSharp.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\x64\libSkiaSharp.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\SkiaSharp.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\Spire.Pdf.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\System.Text.Encoding.CodePages.dll
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\SkiaSharp.xml
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\Spire.Pdf.xml

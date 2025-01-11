@@ -101,7 +101,7 @@ namespace HelloworkPDFTool
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "PDFファイル|*.pdf";
+            sfd.Filter = "CSVファイル|*.csv";
 
             if(sfd.ShowDialog() == DialogResult.OK)
             {
