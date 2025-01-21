@@ -34,3 +34,4 @@ C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\Spire.Pdf
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\SkiaSharp.xml
 C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\bin\Debug\Spire.Pdf.xml
+C:\Users\mypc\source\repos\HelloworkPDFTool\HelloworkPDFTool\obj\Debug\HelloworkPDFTool.SettingsForm.resources

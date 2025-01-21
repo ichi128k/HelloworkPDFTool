@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace HelloworkPDFTool
 {
@@ -29,16 +30,14 @@ namespace HelloworkPDFTool
         /// <summary>
         /// Rect positions of pdf string
         /// </summary>
-        private PdfTextExtractOptions optionsPosition;
-        private PdfTextExtractOptions optionsDetails;
-        private PdfTextExtractOptions optionsNum;
-        private PdfTextExtractOptions optionsStart;
-        private PdfTextExtractOptions optionsExpire;
+        /// 
+        private List<PDFExtractSettingsAndPageNum> extractOptions;
+
 
         /// <summary>
         /// Data cache for writing spreadsheet
         /// </summary>
-        private List<HWData> hwds;
+        private List<List<string>> temp;
 
         /// <summary>
         /// Initalization
@@ -46,19 +45,8 @@ namespace HelloworkPDFTool
         public PDFs()
         {
             filePaths = new List<string>();
-            hwds = new List<HWData>();
-
-            optionsPosition = new PdfTextExtractOptions();
-            optionsDetails = new PdfTextExtractOptions();
-            optionsNum = new PdfTextExtractOptions();
-            optionsStart = new PdfTextExtractOptions();
-            optionsExpire = new PdfTextExtractOptions();
-
-            optionsPosition.ExtractArea = new Rectangle(30, 250, 260, 30);
-            optionsDetails.ExtractArea = new Rectangle(30, 270, 260, 120);
-            optionsNum.ExtractArea = new Rectangle(0, 50, 200, 10);
-            optionsStart.ExtractArea = new Rectangle(300, 0, 100, 40);
-            optionsExpire.ExtractArea = new Rectangle(450, 0, 100, 40);
+            temp = new List<List<string>>();
+            extractOptions = new List<PDFExtractSettingsAndPageNum>();
         }
 
         /// <summary>
@@ -69,7 +57,8 @@ namespace HelloworkPDFTool
             if(filePaths.Count > 0)
             {
                 //Clear HWD Data
-                hwds.Clear();
+                temp.Clear();
+                extractOptions.Clear();
 
                 //Read pdfs
                 ReadPDFs();
@@ -86,34 +75,51 @@ namespace HelloworkPDFTool
 
         }
 
+        /// <summary>
+        /// Read PDFs and write datas to hwds
+        /// </summary>
         private bool ReadPDFs()
         {
-            foreach(string path in filePaths)
+            //Create extract options from Program.settings.hwFields
+            foreach (HWField hwf in Program.settings.hwFields)
+            {
+                PDFExtractSettingsAndPageNum pesap = new PDFExtractSettingsAndPageNum();
+                pesap.pageNum = hwf.pageNumber;
+                pesap.option.ExtractArea = hwf.rect;
+
+                extractOptions.Add(pesap);
+            }
+
+            foreach (string path in filePaths)
             {
                 //Read each pdf file
                 PdfDocument pdf = new PdfDocument();
                 pdf.LoadFromFile(path);
 
                 //Check whether the file is Hello Work-compatible or not
-                if(pdf.Pages.Count >= 2)
+                if (pdf.Pages.Count >= 2)
                 {
-                    PdfPageBase page = pdf.Pages[0];
-                    PdfTextExtractor extractor = new PdfTextExtractor(page);
-                    HWData hwd;
+                    PdfPageBase page0 = pdf.Pages[0];
+                    PdfPageBase page1 = pdf.Pages[1];
 
-                    string p = FormatText(extractor.ExtractText(optionsPosition));
-                    string d = FormatText(extractor.ExtractText(optionsDetails));
-                    string n = FormatText(extractor.ExtractText(optionsNum));
-                    string s = FormatText(extractor.ExtractText(optionsStart));
-                    string e = FormatText(extractor.ExtractText(optionsExpire));
+                    PdfTextExtractor extractor0 = new PdfTextExtractor(page0);
+                    PdfTextExtractor extractor1 = new PdfTextExtractor(page1);
 
-                    hwd = new HWData { position = p, details = d, number = n, start = s, expire = e };
-                    hwds.Add(hwd);
+                    List<string> tempField = new List<string>();
+
+                    foreach(PDFExtractSettingsAndPageNum p in extractOptions)
+                    {
+                        string s = p.pageNum == 0 ? FormatText(extractor0.ExtractText(p.option)) : 
+                            FormatText(extractor1.ExtractText(p.option));
+                        
+                        tempField.Add(s);
+                    }
+
+                    temp.Add(tempField);
                 }
                 else
                 {
-                    Console.WriteLine("Skipped.");
-                    Console.WriteLine();
+
                 }
 
                 pdf.Close();
@@ -128,19 +134,35 @@ namespace HelloworkPDFTool
             tsp.Maximum = Program.pdfs.filePaths.Count;
 
             using (StreamWriter sw = new StreamWriter(path))
-            using (CsvWriter csv = new CsvWriter(sw,CultureInfo.InvariantCulture))
+            using (CsvWriter csv = new CsvWriter(sw, CultureInfo.InvariantCulture))
             {
                 //Initialize CsvWriter
-                csv.Context.RegisterClassMap<HWDataMap>();
+
+                //Add CSV header
+                foreach (HWField hwf in Program.settings.hwFields)
+                {
+                    csv.WriteField(hwf.name);
+                }
+                csv.NextRecord();
 
                 //Write records
                 int i = 0;
-                foreach (HWData hwd in hwds)
+                foreach (List<string> record in temp)
                 {
                     tsp.Value = i;
-                    csv.WriteRecord(hwd);
+                    foreach(string s in record)
+                    {
+                        csv.WriteField(s);
+                    }
+
+                    csv.NextRecord();
+
                     i++;
                 }
+
+                //Flush
+                csv.Flush();
+                sw.Flush();
             }
 
             //Reset TSP
@@ -156,27 +178,17 @@ namespace HelloworkPDFTool
 
             return nStr;
         }
-
-    }
-    public class HWData
-    {
-        public string position { get; set; }
-        public string details { get; set; }
-        public string number { get; set; }
-        public string start { get; set; }
-        public string expire { get; set; }
-
     }
 
-    public class HWDataMap : ClassMap<HWData>
+    public class PDFExtractSettingsAndPageNum
     {
-        public HWDataMap()
+        public PdfTextExtractOptions option;
+        public int pageNum;
+
+        public PDFExtractSettingsAndPageNum()
         {
-            Map(m => m.position);
-            Map(m => m.details);
-            Map(m => m.number);
-            Map(m => m.start);
-            Map(m => m.expire);
+            option = new PdfTextExtractOptions();
+            pageNum = 0;
         }
     }
 }

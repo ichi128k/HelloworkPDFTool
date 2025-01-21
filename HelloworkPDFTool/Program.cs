@@ -10,6 +10,12 @@ namespace HelloworkPDFTool
     {
         public static PDFs pdfs;
 
+        public static Settings settings;
+
+        public const int maxFileCount = 50;
+
+        public const int maxFieldCont = 10;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,6 +24,16 @@ namespace HelloworkPDFTool
         {
             //Initialize
             pdfs = new PDFs();
+
+            //Initialize Settings
+            settings = new Settings();
+
+            if(!settings.LoadSettings())
+            {
+                //If setting file has not been opened correctly(File is not exist, etc.),
+                //Set settings values to factory settings
+                settings.LoadFactorySettings();
+            }
 
             //Launch Application
             Application.EnableVisualStyles();

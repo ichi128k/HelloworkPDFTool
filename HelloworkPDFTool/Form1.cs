@@ -58,16 +58,29 @@ namespace HelloworkPDFTool
             {
                 //Get datas from data
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                Console.WriteLine(files);
+                bool showMessage = false;
 
                 //Filter files
                 foreach(string file in files)
                 {
                     //Check the extension of file and uniqueness
-                    if(Path.GetExtension(file).ToLower() == ".pdf")
+                    if (Path.GetExtension(file).ToLower() == ".pdf")
                     {
-                        AddFile(file);
+                        if (Program.pdfs.filePaths.Count < Program.maxFileCount)
+                        {
+                            AddFile(file);
+                        }
+                        else
+                        {
+                            showMessage = true;
+                        }
                     }
+                }
+
+                //Show message
+                if(showMessage)
+                {
+                    ShowMaxMessage();
                 }
             }
         }
@@ -86,10 +99,25 @@ namespace HelloworkPDFTool
             //Check whether OFD has been opened or not
             if(ofd.ShowDialog() == DialogResult.OK)
             {
+                bool showMessage = false;
+
                 //Add the path to each list
-                foreach(string fileName in ofd.FileNames)
+                foreach (string fileName in ofd.FileNames)
                 {
-                    AddFile(fileName);
+                    if (Program.pdfs.filePaths.Count < Program.maxFileCount)
+                    {
+                        AddFile(fileName);
+                    }
+                    else
+                    {
+                        showMessage = true;
+                    }
+                }
+
+                //Show message
+                if (showMessage)
+                {
+                    ShowMaxMessage();
                 }
             }
 
@@ -105,9 +133,16 @@ namespace HelloworkPDFTool
 
             if(sfd.ShowDialog() == DialogResult.OK)
             {
+                //Disable buttons
+                SetAllButtonsState(false);
+
                 //Save to SpreadSheet
                 string message = Program.pdfs.Export(sfd.FileName,toolStripProgressBar1);
                 MessageBox.Show(message);
+
+                //Re-enable buttons
+                SetAllButtonsState(true);
+
             }
         }
 
@@ -116,7 +151,8 @@ namespace HelloworkPDFTool
         /// </summary>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            
+            SettingsForm sf = new SettingsForm();
+            sf.ShowDialog();
         }
 
         /// <summary>
@@ -161,6 +197,20 @@ namespace HelloworkPDFTool
                 //else
                 e.Effect = DragDropEffects.None;
             }
+        }
+
+        private void SetAllButtonsState(bool state)
+        {
+            buttonOpenFile.Enabled = state;
+            buttonGenerate.Enabled = state;
+            buttonRemove.Enabled = state;
+            buttonClear.Enabled = state;
+            buttonSettings.Enabled = state;
+        }
+
+        private void ShowMaxMessage()
+        {
+            MessageBox.Show("登録できる件数は最大" + Program.maxFileCount + "件までです。");
         }
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listBoxPDFs = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buttonImport = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
@@ -68,7 +68,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.buttonImport);
             this.splitContainer1.Panel1.Controls.Add(this.buttonClear);
             this.splitContainer1.Panel1.Controls.Add(this.buttonRemove);
             this.splitContainer1.Panel1.Controls.Add(this.buttonGenerate);
@@ -83,15 +82,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(815, 487);
             this.splitContainer1.SplitterDistance = 64;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // buttonImport
-            // 
-            this.buttonImport.Location = new System.Drawing.Point(520, 0);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(124, 64);
-            this.buttonImport.TabIndex = 5;
-            this.buttonImport.Text = "CSVからインポート";
-            this.buttonImport.UseVisualStyleBackColor = true;
             // 
             // buttonClear
             // 
@@ -154,6 +144,7 @@
             this.statusStrip1.Size = new System.Drawing.Size(815, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip1.Visible = false;
             // 
             // toolStripStatusLabel1
             // 
@@ -173,8 +164,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 487);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ハローワークスキャナー";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -197,7 +189,6 @@
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonRemove;
-        private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
