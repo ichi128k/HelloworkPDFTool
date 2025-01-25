@@ -94,7 +94,18 @@ namespace HelloworkPDFTool
             {
                 //Read each pdf file
                 PdfDocument pdf = new PdfDocument();
-                pdf.LoadFromFile(path);
+
+                try 
+                {
+                    pdf.LoadFromFile(path);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(path + ": 読み込み失敗もしくはその他のエラーがが発生しました。");
+                    pdf.Close();
+
+                    continue;
+                }
 
                 //Check whether the file is Hello Work-compatible or not
                 if (pdf.Pages.Count >= 2)
@@ -131,7 +142,7 @@ namespace HelloworkPDFTool
         private bool WriteSheet(string path, ToolStripProgressBar tsp)
         {
             //Set properties of progress bar
-            tsp.Maximum = Program.pdfs.filePaths.Count;
+            tsp.Maximum = temp.Count;
 
             using (StreamWriter sw = new StreamWriter(path))
             using (CsvWriter csv = new CsvWriter(sw, CultureInfo.InvariantCulture))

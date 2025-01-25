@@ -201,6 +201,7 @@ namespace HelloworkPDFTool
 
         private void SetAllButtonsState(bool state)
         {
+            listBoxPDFs.Enabled = state;
             buttonOpenFile.Enabled = state;
             buttonGenerate.Enabled = state;
             buttonRemove.Enabled = state;
